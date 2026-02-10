@@ -5,6 +5,8 @@ import { useGSAP } from '@gsap/react';
 import { Cat } from './Cat';
 import SplitText from './SplitText';
 import nerdcatUrl from './assets/nerdcat.jpeg';
+import gifUrl from './assets/200w.gif';
+import plinkNerdGif from './assets/plink-nerd.gif';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -14,6 +16,7 @@ function App() {
   const questionRef = useRef(null);
   const buttonsRef = useRef(null);
   const scrollHintRef = useRef(null);
+  const gifRef = useRef(null);
 
   const handleNoClick = (e) => {
     const button = e.target;
@@ -38,20 +41,22 @@ function App() {
 
   useGSAP(
     () => {
-      if (!sectionRef.current || !questionRef.current || !buttonsRef.current) return;
+      if (!sectionRef.current || !questionRef.current || !buttonsRef.current || !gifRef.current) return;
 
       const question = questionRef.current;
       const buttons = buttonsRef.current;
+      const gif = gifRef.current;
 
-      gsap.set([question, buttons], { opacity: 0, y: 30 });
+      gsap.set([gif, buttons, question], { opacity: 0, y: 30 });
 
       const st = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top 85%',
         once: true,
         onEnter: () => {
-          gsap.to(question, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+          gsap.to(gif, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
           gsap.to(buttons, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power3.out' });
+          gsap.to(question, { opacity: 1, y: 0, duration: 0.6, delay: 0.4, ease: 'power3.out' });
         }
       });
 
@@ -78,7 +83,7 @@ function App() {
       <div className="cat-layer">
         <Cat />
       </div>
-      <section className="hero">
+      <section className="hero" style={{ '--hero-bg-img': `url(${plinkNerdGif})` }}>
         <div className="hero-inner">
           <SplitText
             text="I have a Question 🤓"
@@ -100,17 +105,18 @@ function App() {
       </section>
 
       <section ref={sectionRef} className="scroll-section">
-        <h2 ref={questionRef} className="question-text">
-          Will you be my Valentine?
-        </h2>
+        <img ref={gifRef} src={gifUrl} alt="" className="valentine-gif" />
         <div ref={buttonsRef} className="buttons-wrapper">
-          <button className="valentine-button yes-button" onClick={handleYesClick}>
-            Yes 💕
-          </button>
           <button className="valentine-button no-button" onClick={handleNoClick}>
             No
           </button>
+          <button className="valentine-button yes-button" onClick={handleYesClick}>
+            Yes 💕
+          </button>
         </div>
+        <h2 ref={questionRef} className="question-text">
+          Will you be my Valentine?
+        </h2>
       </section>
     </div>
   );

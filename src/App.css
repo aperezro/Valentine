@@ -43,7 +43,7 @@ body {
       rgba(0, 0, 0, 0.35),
       rgba(0, 0, 0, 0.35)
     ),
-    var(--bg-img);
+    var(--hero-bg-img, var(--bg-img));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -101,15 +101,23 @@ body {
   line-height: 1.3;
 }
 
+.valentine-gif {
+  width: 200px;
+  height: auto;
+  margin-bottom: 24px;
+  display: block;
+}
+
 .buttons-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 320px;
+  max-width: 500px;
   position: relative;
-  min-height: 140px;
+  margin-bottom: 32px;
 }
 
 .valentine-button {
@@ -121,8 +129,8 @@ body {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 280px;
+  flex: 0 1 auto;
+  min-width: 120px;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
 }
@@ -173,13 +181,19 @@ body {
     margin-bottom: 36px;
   }
 
+  .valentine-gif {
+    width: 250px;
+    margin-bottom: 32px;
+  }
+
   .buttons-wrapper {
-    max-width: 340px;
-    gap: 20px;
+    max-width: 600px;
+    gap: 24px;
+    margin-bottom: 36px;
   }
 
   .valentine-button {
-    max-width: 300px;
+    min-width: 140px;
     padding: 20px 40px;
     font-size: 1.35rem;
   }
