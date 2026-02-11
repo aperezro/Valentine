@@ -18,25 +18,8 @@ function App() {
   const scrollHintRef = useRef(null);
   const gifRef = useRef(null);
 
-  const handleNoClick = (e) => {
-    const button = e.target;
-    const container = button.parentElement;
-    const containerRect = container.getBoundingClientRect();
-    const buttonRect = button.getBoundingClientRect();
-
-    const maxX = containerRect.width - buttonRect.width;
-    const maxY = containerRect.height - buttonRect.height;
-
-    const randomX = Math.random() * Math.max(0, maxX);
-    const randomY = Math.random() * Math.max(0, maxY);
-
-    button.style.position = 'absolute';
-    button.style.left = `${randomX}px`;
-    button.style.top = `${randomY}px`;
-  };
-
-  const handleYesClick = () => {
-    alert("Yay! 💕 Happy Valentine's Day! 💕");
+  const handleNoResponse = () => {
+    alert('Are you sure? 💔');
   };
 
   useGSAP(
@@ -47,7 +30,7 @@ function App() {
       const buttons = buttonsRef.current;
       const gif = gifRef.current;
 
-      gsap.set([gif, buttons, question], { opacity: 0, y: 30 });
+      gsap.set([gif, question, buttons], { opacity: 0, y: 30 });
 
       const st = ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -55,8 +38,8 @@ function App() {
         once: true,
         onEnter: () => {
           gsap.to(gif, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
-          gsap.to(buttons, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power3.out' });
-          gsap.to(question, { opacity: 1, y: 0, duration: 0.6, delay: 0.4, ease: 'power3.out' });
+          gsap.to(question, { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power3.out' });
+          gsap.to(buttons, { opacity: 1, y: 0, duration: 0.6, delay: 0.35, ease: 'power3.out' });
         }
       });
 
@@ -106,17 +89,17 @@ function App() {
 
       <section ref={sectionRef} className="scroll-section">
         <img ref={gifRef} src={gifUrl} alt="" className="valentine-gif" />
-        <div ref={buttonsRef} className="buttons-wrapper">
-          <button className="valentine-button no-button" onClick={handleNoClick}>
-            No
-          </button>
-          <button className="valentine-button yes-button" onClick={handleYesClick}>
-            Yes 💕
-          </button>
-        </div>
         <h2 ref={questionRef} className="question-text">
           Will you be my Valentine?
         </h2>
+        <div ref={buttonsRef} className="buttons-wrapper">
+          <button className="valentine-button no-button" onClick={handleNoResponse}>
+            No
+          </button>
+          <button className="valentine-button no-button" onClick={handleNoResponse}>
+            No
+          </button>
+        </div>
       </section>
     </div>
   );

@@ -110,14 +110,13 @@ body {
 
 .buttons-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 16px;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
-  position: relative;
-  margin-bottom: 32px;
+  max-width: 320px;
+  margin-top: 24px;
 }
 
 .valentine-button {
@@ -187,9 +186,10 @@ body {
   }
 
   .buttons-wrapper {
-    max-width: 600px;
+    flex-direction: row;
+    max-width: 480px;
     gap: 24px;
-    margin-bottom: 36px;
+    margin-top: 32px;
   }
 
   .valentine-button {
